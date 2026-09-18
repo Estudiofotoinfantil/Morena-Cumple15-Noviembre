@@ -1716,11 +1716,11 @@ Lugar
 </div>
 
 <div class="det-val">
-Sindicato SOIP
+GYE
 </div>
 
 <div class="det-sub">
-12 de Octubre 4445 · Mar del Plata, Argentina
+12 de Octubre 4425 · B7603 Mar del Plata, Provincia de Buenos Aires
 </div>
 
 </div>
@@ -1780,12 +1780,12 @@ Cómo llegar
 <div class="map-body">
 
 <div class="map-name">
-Sindicato SOIP
+GYE
 </div>
 
 <div class="map-addr">
-12 de Octubre 4445<br>
-Mar del Plata, Buenos Aires, Argentina
+12 de Octubre 4425<br>
+B7603 Mar del Plata, Provincia de Buenos Aires
 </div>
 
 <button class="btn-gps" onclick="openGPS()">
@@ -2139,6 +2139,7 @@ btn.classList.add('copied');
 setTimeout(function(){
 
 label.textContent='Copiar alias';
+
 btn.classList.remove('copied');
 
 },2200);
@@ -2431,15 +2432,15 @@ setInterval(upd,1000);
 
 function initMap(){
 
-var lat=-38.0055;
+var lat=-38.035444597489665;
 
-var lng=-57.5535;
+var lng=-57.556169183899165;
 
 var map=L.map('map',{
 zoomControl:true,
 dragging:true,
 scrollWheelZoom:false
-}).setView([lat,lng],15);
+}).setView([lat,lng],17);
 
 L.tileLayer(
 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -2464,7 +2465,7 @@ icon:icon
 })
 .addTo(map)
 .bindPopup(
-'<b>Sindicato SOIP</b><br>XV Años · Morena'
+'<b>GYE</b><br>12 de Octubre 4425<br>XV Años · Morena'
 )
 .openPopup();
 
@@ -2472,8 +2473,8 @@ icon:icon
 
 function openGPS(){
 
-var lat=-38.0055;
-var lng=-57.5535;
+var lat=-38.035444597489665;
+var lng=-57.556169183899165;
 
 window.open(
 'https://www.google.com/maps/dir/?api=1&destination='
