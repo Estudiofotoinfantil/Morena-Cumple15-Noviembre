@@ -481,7 +481,7 @@ color:var(--gold);
 opacity:.7;
 }
 
-/* GALERÍA — ÚNICA MODIFICACIÓN */
+/* GALERÍA */
 
 .gal-wrap {
 display:grid;
@@ -703,18 +703,58 @@ display:block;
 }
 
 .transfer-alias {
-font-family:'Cormorant Garamond',serif;
-font-size:24px;
-font-weight:600;
+font-family:'Montserrat',sans-serif;
+font-size:20px;
+font-weight:500;
 color:var(--brown);
-letter-spacing:1px;
+letter-spacing:.5px;
 word-break:break-word;
+font-variant-numeric:normal;
+-webkit-font-feature-settings:"kern";
+font-feature-settings:"kern";
+}
+
+.copy-alias-btn {
+width:100%;
+margin-top:14px;
+padding:12px 14px;
+background:rgba(216,188,130,.12);
+border:1px solid rgba(184,148,85,.35);
+color:var(--brown);
+font-family:'Montserrat',sans-serif;
+font-size:8.5px;
+font-weight:600;
+letter-spacing:2.5px;
+text-transform:uppercase;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+transition:
+background .25s ease,
+border-color .25s ease,
+transform .15s ease;
+}
+
+.copy-alias-btn:hover {
+background:rgba(216,188,130,.20);
+border-color:rgba(184,148,85,.60);
+}
+
+.copy-alias-btn:active {
+transform:scale(.97);
+}
+
+.copy-alias-btn.copied {
+background:rgba(184,148,85,.16);
+border-color:rgba(184,148,85,.60);
 }
 
 .transfer-name {
 font-size:11px;
 color:var(--text-mid);
-margin-top:4px;
+margin-top:10px;
 line-height:1.5;
 }
 
@@ -1562,9 +1602,21 @@ a través de una transferencia.
 Datos para transferencia
 </span>
 
-<div class="transfer-alias">
+<div class="transfer-alias" id="alias-text">
 morena.tour.2011
 </div>
+
+<button
+type="button"
+class="copy-alias-btn"
+id="copy-alias-btn"
+onclick="copyAlias()"
+aria-label="Copiar alias bancario">
+
+<span>⧉</span>
+<span id="copy-alias-label">Copiar alias</span>
+
+</button>
 
 <div class="transfer-name">
 A nombre de<br>
@@ -2003,6 +2055,103 @@ var btn=document.getElementById('mute-btn');
 music.muted=!music.muted;
 
 btn.textContent=music.muted?'🔇':'🔊';
+
+}
+
+/* COPIAR ALIAS */
+
+function copyAlias(){
+
+var alias=document
+.getElementById('alias-text')
+.textContent
+.trim();
+
+var btn=document.getElementById('copy-alias-btn');
+var label=document.getElementById('copy-alias-label');
+
+function copied(){
+
+label.textContent='✓ Alias copiado';
+
+btn.classList.add('copied');
+
+setTimeout(function(){
+
+label.textContent='Copiar alias';
+
+btn.classList.remove('copied');
+
+},2200);
+
+}
+
+if(navigator.clipboard && window.isSecureContext){
+
+navigator.clipboard.writeText(alias)
+.then(function(){
+
+copied();
+
+})
+.catch(function(){
+
+fallbackCopy(alias);
+
+});
+
+}else{
+
+fallbackCopy(alias);
+
+}
+
+}
+
+function fallbackCopy(text){
+
+var textarea=document.createElement('textarea');
+
+textarea.value=text;
+
+textarea.style.position='fixed';
+textarea.style.opacity='0';
+textarea.style.pointerEvents='none';
+
+document.body.appendChild(textarea);
+
+textarea.focus();
+textarea.select();
+textarea.setSelectionRange(0,99999);
+
+try{
+
+var ok=document.execCommand('copy');
+
+if(ok){
+
+var btn=document.getElementById('copy-alias-btn');
+var label=document.getElementById('copy-alias-label');
+
+label.textContent='✓ Alias copiado';
+btn.classList.add('copied');
+
+setTimeout(function(){
+
+label.textContent='Copiar alias';
+btn.classList.remove('copied');
+
+},2200);
+
+}
+
+}catch(e){
+
+console.log('No se pudo copiar automáticamente.');
+
+}
+
+document.body.removeChild(textarea);
 
 }
 
