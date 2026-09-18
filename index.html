@@ -1,0 +1,2822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Morena · XV Años ✨</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<style>
+
+:root {
+--ivory:#FBF8F1;
+--cream:#F5EFE3;
+--champagne:#E9D7B0;
+--gold:#B89455;
+--gold-light:#D8BC82;
+--gold-soft:#C9AA70;
+--brown:#594B3A;
+--brown-soft:#806F58;
+--text:#40382D;
+--text-mid:rgba(64,56,45,.68);
+--text-soft:rgba(64,56,45,.42);
+--white:#FFFFFF;
+}
+
+* {
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+html {
+scroll-behavior:smooth;
+}
+
+body {
+background:var(--ivory);
+font-family:'Montserrat',sans-serif;
+color:var(--text);
+overflow-x:hidden;
+max-width:430px;
+margin:0 auto;
+}
+
+#glitter-bg {
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:0;
+}
+
+#page-wrap {
+position:relative;
+z-index:1;
+}
+
+/* ═════════════════════════════
+INTRO
+═════════════════════════════ */
+
+#intro {
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 50% 40%,#fffdf8 0%,#F7F0E3 45%,#EEE3CF 100%);
+z-index:1000;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:2rem;
+overflow:hidden;
+transition:opacity 1.2s ease;
+}
+
+#intro-canvas {
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+pointer-events:none;
+}
+
+.intro-content {
+position:relative;
+z-index:2;
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+}
+
+.intro-xv {
+font-family:'Cormorant Garamond',serif;
+font-size:94px;
+font-weight:700;
+color:transparent;
+background:linear-gradient(160deg,#D9BD82,#A77D38,#D8BC82);
+-webkit-background-clip:text;
+background-clip:text;
+line-height:.85;
+letter-spacing:-2px;
+filter:drop-shadow(0 5px 15px rgba(160,120,50,.18));
+animation:fadeUp 1s ease .4s both;
+}
+
+.intro-script {
+font-family:'Cormorant Garamond',serif;
+font-size:13px;
+font-style:italic;
+font-weight:300;
+color:var(--brown-soft);
+letter-spacing:6px;
+text-transform:uppercase;
+animation:fadeUp 1s ease .6s both;
+margin-top:.25rem;
+}
+
+.intro-name {
+font-family:'Cormorant Garamond',serif;
+font-size:72px;
+font-weight:600;
+color:var(--brown);
+letter-spacing:4px;
+animation:fadeUp 1s ease .8s both;
+margin-top:.5rem;
+}
+
+.intro-line {
+width:120px;
+height:1px;
+background:linear-gradient(
+90deg,
+transparent,
+var(--gold),
+transparent
+);
+margin:1.5rem auto;
+animation:fadeUp 1s ease 1s both;
+}
+
+.intro-sub {
+font-size:9.5px;
+letter-spacing:4px;
+text-transform:uppercase;
+color:var(--text-soft);
+font-weight:300;
+animation:fadeUp 1s ease 1.2s both;
+line-height:1.9;
+}
+
+.intro-btn {
+margin-top:2.5rem;
+background:linear-gradient(
+135deg,
+rgba(184,148,85,.08),
+rgba(216,188,130,.18)
+);
+border:1px solid rgba(184,148,85,.55);
+color:var(--brown);
+padding:16px 52px;
+font-family:'Montserrat',sans-serif;
+font-size:9.5px;
+font-weight:600;
+letter-spacing:4px;
+text-transform:uppercase;
+cursor:pointer;
+animation:fadeUp 1s ease 1.4s both;
+box-shadow:0 8px 30px rgba(120,90,40,.08);
+transition:all .3s;
+}
+
+.intro-btn:hover {
+background:rgba(184,148,85,.15);
+border-color:var(--gold);
+}
+
+.intro-btn:active {
+transform:scale(.96);
+}
+
+/* ═════════════════════════════
+MAIN
+═════════════════════════════ */
+
+#main {
+opacity:0;
+transition:opacity 1.2s ease;
+}
+
+#main.visible {
+opacity:1;
+}
+
+/* ═════════════════════════════
+HERO
+═════════════════════════════ */
+
+.hero {
+min-height:100svh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:4rem 1.5rem 3rem;
+text-align:center;
+position:relative;
+
+background:
+radial-gradient(
+circle at 50% 45%,
+rgba(216,188,130,.14),
+transparent 55%
+);
+}
+
+.hero-glow {
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:330px;
+height:330px;
+background:
+radial-gradient(
+circle,
+rgba(216,188,130,.20) 0%,
+rgba(216,188,130,.06) 38%,
+transparent 72%
+);
+border-radius:50%;
+pointer-events:none;
+animation:glowPulse 4s ease-in-out infinite;
+}
+
+.hero-eyebrow {
+font-size:9.5px;
+letter-spacing:5px;
+text-transform:uppercase;
+color:var(--text-soft);
+font-weight:400;
+margin-bottom:1.5rem;
+animation:fadeUp 1s ease .2s both;
+}
+
+.hero-xv {
+font-family:'Cormorant Garamond',serif;
+font-size:120px;
+font-weight:700;
+color:transparent;
+background:linear-gradient(
+160deg,
+#D8BC82 0%,
+#A87C36 48%,
+#D9C08B 100%
+);
+-webkit-background-clip:text;
+background-clip:text;
+line-height:.85;
+filter:drop-shadow(0 5px 18px rgba(160,120,50,.20));
+animation:fadeUp 1s ease .4s both;
+}
+
+.hero-name {
+font-family:'Cormorant Garamond',serif;
+font-size:54px;
+font-weight:300;
+font-style:italic;
+color:var(--brown);
+animation:fadeUp 1s ease .6s both;
+margin-top:.2rem;
+letter-spacing:2px;
+}
+
+.hero-tagline {
+font-size:9.5px;
+letter-spacing:4px;
+text-transform:uppercase;
+color:var(--text-soft);
+font-weight:300;
+margin-top:1.5rem;
+animation:fadeUp 1s ease .8s both;
+line-height:1.9;
+}
+
+.hero-date {
+margin-top:1.5rem;
+display:inline-block;
+border:1px solid rgba(184,148,85,.30);
+padding:10px 28px;
+font-size:10.5px;
+letter-spacing:3px;
+color:var(--brown-soft);
+animation:fadeUp 1s ease 1s both;
+background:rgba(255,255,255,.48);
+box-shadow:0 4px 20px rgba(120,90,40,.05);
+}
+
+.hero-scroll {
+position:absolute;
+bottom:1.5rem;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:6px;
+cursor:pointer;
+animation:bounce 2s ease infinite 2s;
+}
+
+.hero-scroll span {
+font-size:7.5px;
+letter-spacing:4px;
+color:var(--text-soft);
+text-transform:uppercase;
+}
+
+.hero-scroll-arr {
+width:16px;
+height:16px;
+border-right:1px solid rgba(184,148,85,.5);
+border-bottom:1px solid rgba(184,148,85,.5);
+transform:rotate(45deg);
+}
+
+/* ═════════════════════════════
+COUNTDOWN
+═════════════════════════════ */
+
+.cd-bokeh-strip {
+position:relative;
+padding:3rem 1.5rem;
+overflow:hidden;
+
+background:
+linear-gradient(
+135deg,
+#F4ECDE,
+#FBF8F1,
+#EFE3CF
+);
+
+border-top:1px solid rgba(184,148,85,.16);
+border-bottom:1px solid rgba(184,148,85,.16);
+}
+
+.bokeh-layer {
+position:absolute;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+}
+
+.bk {
+position:absolute;
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+rgba(216,188,130,.20) 0%,
+transparent 70%
+);
+
+animation:
+bokehFloat var(--d,8s)
+ease-in-out infinite
+var(--dl,0s);
+
+filter:blur(2px);
+}
+
+.cd-label-top {
+font-size:9.5px;
+letter-spacing:5px;
+text-transform:uppercase;
+color:var(--text-soft);
+font-weight:300;
+text-align:center;
+margin-bottom:.5rem;
+}
+
+.cd-title {
+font-family:'Cormorant Garamond',serif;
+font-size:14px;
+font-style:italic;
+color:var(--brown-soft);
+text-align:center;
+margin-bottom:2rem;
+letter-spacing:1px;
+}
+
+.cd-grid {
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+position:relative;
+z-index:2;
+}
+
+.cd-item {
+text-align:center;
+}
+
+.cd-num-wrap {
+position:relative;
+background:rgba(255,255,255,.52);
+border:1px solid rgba(184,148,85,.20);
+padding:1.2rem .4rem 1rem;
+margin-bottom:.5rem;
+box-shadow:0 5px 20px rgba(120,90,40,.04);
+}
+
+.cd-num-wrap::before {
+content:'';
+position:absolute;
+top:0;
+left:20%;
+right:20%;
+height:1px;
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(184,148,85,.55),
+transparent
+);
+}
+
+.cd-num {
+font-family:'Cormorant Garamond',serif;
+font-size:44px;
+font-weight:700;
+color:var(--brown);
+line-height:1;
+display:block;
+text-shadow:0 2px 15px rgba(184,148,85,.15);
+}
+
+.cd-lbl {
+font-size:7.5px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:var(--text-soft);
+font-weight:500;
+}
+
+/* ═════════════════════════════
+SECTIONS
+═════════════════════════════ */
+
+.section {
+padding:3.5rem 1.5rem;
+position:relative;
+}
+
+.s-eyebrow {
+font-size:8.5px;
+letter-spacing:5px;
+text-transform:uppercase;
+color:var(--text-soft);
+font-weight:400;
+margin-bottom:.5rem;
+}
+
+.s-title {
+font-family:'Cormorant Garamond',serif;
+font-size:36px;
+font-weight:600;
+color:var(--brown);
+line-height:1.05;
+}
+
+.s-div {
+display:flex;
+align-items:center;
+gap:14px;
+margin:1.75rem 0;
+}
+
+.s-line {
+flex:1;
+height:1px;
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(184,148,85,.28)
+);
+}
+
+.s-line.r {
+background:
+linear-gradient(
+270deg,
+transparent,
+rgba(184,148,85,.28)
+);
+}
+
+.s-star {
+font-size:13px;
+color:var(--gold);
+opacity:.7;
+}
+
+/* ═════════════════════════════
+GALLERY
+═════════════════════════════ */
+
+.gal-wrap {
+display:flex;
+flex-direction:column;
+gap:3px;
+}
+
+.gal-hero,
+.gal-pair-item {
+position:relative;
+background:#EFE7D8;
+border:1px solid rgba(184,148,85,.18);
+overflow:hidden;
+cursor:pointer;
+transition:border-color .3s;
+}
+
+.gal-hero:hover,
+.gal-pair-item:hover {
+border-color:rgba(184,148,85,.45);
+}
+
+.gal-hero img,
+.gal-pair-item img {
+width:100%;
+height:auto;
+display:block;
+transition:transform .6s ease;
+}
+
+.gal-hero:hover img,
+.gal-pair-item:hover img {
+transform:scale(1.02);
+}
+
+.gal-pair {
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:3px;
+}
+
+.gal-shimmer {
+position:absolute;
+inset:0;
+pointer-events:none;
+
+background:
+linear-gradient(
+to top,
+rgba(55,42,25,.20) 0%,
+transparent 40%
+);
+}
+
+.gal-lbl {
+position:absolute;
+bottom:10px;
+left:50%;
+transform:translateX(-50%);
+font-size:7.5px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:rgba(255,255,255,.78);
+white-space:nowrap;
+text-shadow:0 1px 4px rgba(0,0,0,.55);
+}
+
+/* ═════════════════════════════
+LIGHTBOX
+═════════════════════════════ */
+
+#lightbox {
+display:none;
+position:fixed;
+inset:0;
+background:rgba(53,43,30,.94);
+z-index:800;
+align-items:center;
+justify-content:center;
+padding:1rem;
+flex-direction:column;
+gap:1rem;
+}
+
+#lightbox.open {
+display:flex;
+}
+
+#lb-img {
+max-width:100%;
+max-height:90svh;
+object-fit:contain;
+border:1px solid rgba(216,188,130,.45);
+}
+
+#lb-cap {
+font-size:9.5px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:rgba(255,255,255,.65);
+}
+
+#lb-close {
+position:absolute;
+top:14px;
+right:14px;
+width:38px;
+height:38px;
+background:rgba(255,255,255,.12);
+border:1px solid rgba(216,188,130,.35);
+border-radius:50%;
+color:#F8E9C9;
+font-size:17px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+/* ═════════════════════════════
+DRESS CODE
+═════════════════════════════ */
+
+.dc-card,
+.regalo-card {
+background:
+linear-gradient(
+135deg,
+rgba(255,255,255,.60),
+rgba(245,237,222,.55)
+);
+
+border:1px solid rgba(184,148,85,.20);
+padding:2rem 1.5rem;
+text-align:center;
+position:relative;
+overflow:hidden;
+
+box-shadow:
+0 12px 40px rgba(120,90,40,.05);
+}
+
+.dc-card::before,
+.regalo-card::before {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:1px;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(184,148,85,.65),
+transparent
+);
+}
+
+.dc-card::after,
+.regalo-card::after {
+content:'';
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+height:1px;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(184,148,85,.45),
+transparent
+);
+}
+
+.dc-icon-wrap {
+width:60px;
+height:60px;
+margin:0 auto 1.25rem;
+border:1px solid rgba(184,148,85,.30);
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+background:rgba(216,188,130,.12);
+box-shadow:0 5px 25px rgba(184,148,85,.10);
+}
+
+.dc-title {
+font-family:'Cormorant Garamond',serif;
+font-size:28px;
+font-weight:600;
+color:var(--brown);
+letter-spacing:3px;
+margin-bottom:.5rem;
+text-transform:uppercase;
+}
+
+.dc-subtitle {
+font-size:9.5px;
+letter-spacing:4px;
+text-transform:uppercase;
+color:var(--gold);
+margin-bottom:1rem;
+font-weight:400;
+}
+
+.dc-desc {
+font-size:13px;
+font-weight:300;
+color:var(--text-mid);
+line-height:1.9;
+}
+
+.dc-tags {
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:8px;
+margin-top:1.5rem;
+}
+
+.dc-tag {
+border:1px solid rgba(184,148,85,.25);
+padding:5px 16px;
+font-size:8.5px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:var(--brown-soft);
+font-weight:400;
+background:rgba(216,188,130,.08);
+}
+
+/* ═════════════════════════════
+REGALO
+═════════════════════════════ */
+
+.cofre-icon {
+font-size:52px;
+display:block;
+margin-bottom:1rem;
+filter:drop-shadow(0 5px 12px rgba(184,148,85,.20));
+animation:gemFloat 3s ease-in-out infinite;
+}
+
+.regalo-title {
+font-family:'Cormorant Garamond',serif;
+font-size:26px;
+font-weight:600;
+color:var(--brown);
+letter-spacing:2px;
+margin-bottom:.5rem;
+}
+
+.regalo-subtitle {
+font-size:8.5px;
+letter-spacing:4px;
+text-transform:uppercase;
+color:var(--gold);
+font-weight:400;
+margin-bottom:1.25rem;
+}
+
+.regalo-desc {
+font-size:13px;
+font-weight:300;
+color:var(--text-mid);
+line-height:1.9;
+margin-bottom:1.25rem;
+}
+
+.transfer-box {
+background:
+rgba(216,188,130,.09);
+
+border:1px solid rgba(184,148,85,.25);
+
+padding:1.25rem 1rem;
+margin-top:1rem;
+text-align:left;
+}
+
+.transfer-label {
+font-size:8px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:var(--gold);
+margin-bottom:8px;
+display:block;
+}
+
+.transfer-alias {
+font-family:'Cormorant Garamond',serif;
+font-size:24px;
+font-weight:600;
+color:var(--brown);
+letter-spacing:1px;
+word-break:break-word;
+}
+
+.transfer-name {
+font-size:11px;
+color:var(--text-mid);
+margin-top:4px;
+line-height:1.5;
+}
+
+.transfer-copy {
+margin-top:12px;
+font-size:8.5px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:var(--brown-soft);
+}
+
+.regalo-highlight {
+background:rgba(216,188,130,.08);
+border:1px solid rgba(184,148,85,.18);
+padding:1.25rem 1.25rem 1rem;
+margin-top:1.5rem;
+font-size:12px;
+font-weight:300;
+color:var(--text-mid);
+line-height:1.9;
+letter-spacing:.3px;
+position:relative;
+}
+
+.regalo-highlight::before {
+content:'✦';
+position:absolute;
+top:-13px;
+left:50%;
+transform:translateX(-50%);
+font-size:22px;
+color:var(--gold);
+background:var(--ivory);
+padding:0 8px;
+}
+
+/* ═════════════════════════════
+DETAILS
+═════════════════════════════ */
+
+.det-card {
+display:flex;
+align-items:center;
+gap:1.25rem;
+padding:1.25rem 0;
+border-bottom:1px solid rgba(184,148,85,.12);
+}
+
+.det-card:last-child {
+border-bottom:none;
+}
+
+.det-num {
+font-family:'Cormorant Garamond',serif;
+font-size:36px;
+font-weight:300;
+color:rgba(184,148,85,.35);
+flex-shrink:0;
+width:40px;
+text-align:center;
+line-height:1;
+}
+
+.det-info {
+flex:1;
+}
+
+.det-lbl {
+font-size:8.5px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:var(--text-soft);
+font-weight:500;
+margin-bottom:4px;
+}
+
+.det-val {
+font-size:14.8px;
+font-weight:400;
+color:var(--text);
+line-height:1.3;
+}
+
+.det-sub {
+font-size:12px;
+font-weight:300;
+color:var(--text-mid);
+margin-top:3px;
+}
+
+/* ═════════════════════════════
+MAP
+═════════════════════════════ */
+
+.map-wrap {
+border:1px solid rgba(184,148,85,.20);
+overflow:hidden;
+box-shadow:0 8px 30px rgba(120,90,40,.05);
+}
+
+#map {
+width:100%;
+height:260px;
+}
+
+.map-body {
+padding:1.25rem;
+background:rgba(255,255,255,.45);
+border-top:1px solid rgba(184,148,85,.14);
+}
+
+.map-name {
+font-family:'Cormorant Garamond',serif;
+font-size:20px;
+font-weight:600;
+color:var(--brown);
+}
+
+.map-addr {
+font-size:12px;
+font-weight:300;
+color:var(--text-mid);
+line-height:1.6;
+margin-top:3px;
+}
+
+.btn-gps {
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+width:100%;
+background:rgba(216,188,130,.08);
+border:1px solid rgba(184,148,85,.30);
+color:var(--brown);
+padding:14px;
+margin-top:1rem;
+font-family:'Montserrat',sans-serif;
+font-size:9.5px;
+font-weight:600;
+letter-spacing:4px;
+text-transform:uppercase;
+cursor:pointer;
+box-shadow:0 5px 20px rgba(120,90,40,.04);
+transition:all .3s;
+}
+
+.btn-gps:hover {
+background:rgba(216,188,130,.16);
+border-color:rgba(184,148,85,.55);
+}
+
+.btn-gps:active {
+transform:scale(.98);
+}
+
+/* ═════════════════════════════
+RSVP
+═════════════════════════════ */
+
+.rsvp-header {
+text-align:center;
+padding:3rem 1.5rem 0;
+}
+
+.rsvp-label {
+font-size:9.5px;
+letter-spacing:5px;
+text-transform:uppercase;
+color:var(--text-soft);
+font-weight:300;
+margin-bottom:.75rem;
+display:block;
+}
+
+.rsvp-title {
+font-family:'Cormorant Garamond',serif;
+font-size:32px;
+font-weight:600;
+color:var(--brown);
+margin-bottom:.75rem;
+}
+
+.rsvp-sub {
+font-size:13px;
+font-weight:300;
+color:var(--text-mid);
+line-height:1.8;
+}
+
+.rsvp-deadline {
+display:inline-flex;
+align-items:center;
+gap:8px;
+margin-top:1rem;
+border:1px solid rgba(184,148,85,.22);
+padding:8px 20px;
+font-size:9.5px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:var(--gold);
+background:rgba(216,188,130,.07);
+}
+
+.cf-wrap {
+margin:2rem 1.5rem;
+background:rgba(255,255,255,.52);
+border:1px solid rgba(184,148,85,.18);
+padding:2rem 1.5rem;
+position:relative;
+box-shadow:0 10px 35px rgba(120,90,40,.04);
+}
+
+.cf-wrap::before {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:1px;
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(184,148,85,.55),
+transparent
+);
+}
+
+.f-group {
+margin-bottom:16px;
+}
+
+.f-label {
+display:block;
+font-size:8.5px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:var(--text-soft);
+font-weight:500;
+margin-bottom:8px;
+}
+
+.f-input {
+width:100%;
+background:rgba(255,255,255,.65);
+border:1px solid rgba(184,148,85,.20);
+padding:13px 14px;
+font-family:'Montserrat',sans-serif;
+font-size:14px;
+color:var(--text);
+outline:none;
+transition:border-color .2s;
+appearance:none;
+}
+
+.f-input:focus {
+border-color:rgba(184,148,85,.55);
+}
+
+.f-input::placeholder {
+color:var(--text-soft);
+}
+
+.f-radio-group {
+display:flex;
+gap:10px;
+}
+
+.f-radio-opt {
+flex:1;
+border:1px solid rgba(184,148,85,.20);
+padding:12px 8px;
+text-align:center;
+cursor:pointer;
+font-size:10.5px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:var(--text-mid);
+background:rgba(255,255,255,.42);
+transition:all .2s;
+user-select:none;
+}
+
+.f-radio-opt.selected {
+border-color:rgba(184,148,85,.55);
+background:rgba(216,188,130,.16);
+color:var(--brown);
+}
+
+.btn-confirm {
+width:100%;
+background:
+linear-gradient(
+135deg,
+rgba(216,188,130,.12),
+rgba(184,148,85,.06)
+);
+
+border:1px solid rgba(184,148,85,.40);
+color:var(--brown);
+padding:16px;
+margin-top:.5rem;
+font-family:'Montserrat',sans-serif;
+font-size:9.5px;
+font-weight:600;
+letter-spacing:4px;
+text-transform:uppercase;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+box-shadow:0 7px 25px rgba(120,90,40,.06);
+transition:all .3s;
+}
+
+.btn-confirm:hover {
+background:rgba(216,188,130,.18);
+border-color:rgba(184,148,85,.65);
+}
+
+.btn-confirm:active {
+transform:scale(.98);
+}
+
+.cf-ok {
+display:none;
+text-align:center;
+padding:2rem 1rem;
+}
+
+.cf-ok.show {
+display:block;
+}
+
+.cf-ok-icon {
+font-size:48px;
+margin-bottom:1rem;
+display:block;
+filter:drop-shadow(0 4px 12px rgba(184,148,85,.25));
+}
+
+.cf-ok-msg {
+font-family:'Cormorant Garamond',serif;
+font-size:24px;
+font-style:italic;
+color:var(--brown);
+}
+
+.cf-ok-sub {
+font-size:12px;
+color:var(--text-mid);
+margin-top:.75rem;
+font-weight:300;
+line-height:1.7;
+}
+
+/* ═════════════════════════════
+FOOTER
+═════════════════════════════ */
+
+.footer {
+padding:4rem 2rem 2.5rem;
+text-align:center;
+border-top:1px solid rgba(184,148,85,.14);
+position:relative;
+background:
+linear-gradient(
+180deg,
+rgba(239,227,207,.25),
+rgba(245,238,226,.55)
+);
+}
+
+.ft-ornament {
+font-size:14px;
+color:var(--gold);
+opacity:.55;
+letter-spacing:16px;
+display:block;
+margin-bottom:2rem;
+}
+
+.ft-quote {
+font-family:'Cormorant Garamond',serif;
+font-size:20px;
+font-style:italic;
+font-weight:300;
+color:rgba(64,56,45,.78);
+line-height:1.85;
+margin-bottom:2.5rem;
+position:relative;
+padding:0 .5rem;
+}
+
+.ft-quote::before {
+content:'"';
+position:absolute;
+top:-30px;
+left:-5px;
+font-size:80px;
+color:rgba(184,148,85,.13);
+line-height:1;
+font-style:normal;
+}
+
+.ft-name {
+font-family:'Cormorant Garamond',serif;
+font-size:42px;
+font-weight:600;
+color:transparent;
+background:
+linear-gradient(
+160deg,
+#D5B876,
+#A77C39,
+#D9BE83
+);
+-webkit-background-clip:text;
+background-clip:text;
+letter-spacing:6px;
+filter:drop-shadow(0 4px 12px rgba(184,148,85,.15));
+}
+
+.ft-div {
+width:60px;
+height:1px;
+background:rgba(184,148,85,.30);
+margin:1.5rem auto;
+}
+
+.ft-brand {
+font-size:8.5px;
+letter-spacing:4px;
+text-transform:uppercase;
+color:var(--text-soft);
+}
+
+.ft-stars {
+font-size:11px;
+color:var(--gold);
+opacity:.4;
+letter-spacing:14px;
+margin-top:2rem;
+display:block;
+}
+
+/* ═════════════════════════════
+BRANDING
+═════════════════════════════ */
+
+.branding-strip {
+border-top:1px solid rgba(184,148,85,.12);
+padding:1.75rem 1.5rem;
+text-align:center;
+background:#F7F1E7;
+}
+
+.branding-label {
+font-size:7.5px;
+letter-spacing:4px;
+text-transform:uppercase;
+color:var(--text-soft);
+font-weight:300;
+margin-bottom:.75rem;
+display:block;
+}
+
+.branding-logo-wrap {
+display:inline-flex;
+align-items:center;
+gap:10px;
+border:1px solid rgba(184,148,85,.20);
+padding:10px 20px;
+background:rgba(255,255,255,.45);
+text-decoration:none;
+transition:border-color .3s,background .3s;
+}
+
+.branding-logo-wrap:hover {
+border-color:rgba(184,148,85,.45);
+background:rgba(216,188,130,.10);
+}
+
+.branding-ig-icon {
+width:22px;
+height:22px;
+border:1px solid rgba(184,148,85,.45);
+border-radius:6px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:14px;
+flex-shrink:0;
+}
+
+.branding-handle {
+font-family:'Cormorant Garamond',serif;
+font-size:18px;
+font-weight:400;
+font-style:italic;
+color:var(--brown);
+letter-spacing:1px;
+}
+
+.branding-sub {
+font-size:7.5px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:var(--text-soft);
+margin-top:.75rem;
+display:block;
+font-weight:300;
+}
+
+/* ═════════════════════════════
+MUSIC BUTTON
+═════════════════════════════ */
+
+#mute-btn {
+position:fixed;
+bottom:22px;
+right:18px;
+z-index:999;
+width:44px;
+height:44px;
+border-radius:50%;
+border:1px solid rgba(184,148,85,.35);
+background:rgba(251,248,241,.88);
+backdrop-filter:blur(10px);
+-webkit-backdrop-filter:blur(10px);
+cursor:pointer;
+font-size:19px;
+display:none;
+align-items:center;
+justify-content:center;
+box-shadow:0 4px 18px rgba(80,60,30,.15);
+transition:border-color .3s,transform .15s;
+-webkit-tap-highlight-color:transparent;
+}
+
+/* ═════════════════════════════
+ANIMATIONS
+═════════════════════════════ */
+
+@keyframes fadeUp {
+from {
+opacity:0;
+transform:translateY(24px);
+}
+to {
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes glowPulse {
+0%,100% {
+opacity:.5;
+transform:translate(-50%,-50%) scale(1);
+}
+50% {
+opacity:1;
+transform:translate(-50%,-50%) scale(1.15);
+}
+}
+
+@keyframes bokehFloat {
+0%,100% {
+transform:translate(0,0) scale(1);
+}
+33% {
+transform:translate(var(--tx,20px),var(--ty,-15px)) scale(1.1);
+}
+66% {
+transform:translate(var(--tx2,-10px),var(--ty2,20px)) scale(.9);
+}
+}
+
+@keyframes bounce {
+0%,100% {
+transform:translateX(-50%) translateY(0);
+}
+50% {
+transform:translateX(-50%) translateY(8px);
+}
+}
+
+@keyframes gemFloat {
+0%,100% {
+transform:translateY(0) rotate(-4deg);
+}
+50% {
+transform:translateY(-10px) rotate(4deg);
+}
+}
+
+.reveal {
+opacity:0;
+transform:translateY(32px);
+transition:
+opacity .8s ease,
+transform .8s ease;
+}
+
+.reveal.visible {
+opacity:1;
+transform:translateY(0);
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="glitter-bg"></canvas>
+
+<!-- ═════════════════════════════
+INTRO
+═════════════════════════════ -->
+
+<div id="intro" role="dialog" aria-label="Invitación XV Años Morena">
+
+<canvas id="intro-canvas"></canvas>
+
+<div class="intro-content">
+
+<div class="intro-xv">XV</div>
+
+<p class="intro-script">· años ·</p>
+
+<h1 class="intro-name">Morena</h1>
+
+<div class="intro-line"></div>
+
+<p class="intro-sub">
+Una noche única<br>
+que el tiempo no borrará
+</p>
+
+<button class="intro-btn" onclick="openInvitation()">
+Abrir Invitación
+</button>
+
+</div>
+</div>
+
+<div id="page-wrap">
+
+<div id="main">
+
+<!-- ═════════════════════════════
+HERO
+═════════════════════════════ -->
+
+<section class="hero">
+
+<div class="hero-glow"></div>
+
+<p class="hero-eyebrow">
+✦ Una invitación especial ✦
+</p>
+
+<div class="hero-xv">XV</div>
+
+<h2 class="hero-name">Morena</h2>
+
+<p class="hero-tagline">
+Quince años de luz · una noche para siempre
+</p>
+
+<div class="hero-date">
+7 DE NOVIEMBRE · 2026 · 20:30 HS
+</div>
+
+<div class="hero-scroll"
+onclick="document.getElementById('cd-section').scrollIntoView({behavior:'smooth'})">
+
+<span>scroll</span>
+
+<div class="hero-scroll-arr"></div>
+
+</div>
+
+</section>
+
+<!-- ═════════════════════════════
+COUNTDOWN
+═════════════════════════════ -->
+
+<div id="cd-section">
+
+<div class="cd-bokeh-strip">
+
+<div class="bokeh-layer">
+
+<div class="bk"
+style="width:120px;height:120px;top:10%;left:-20px;--d:9s;--tx:30px;--ty:-20px;">
+</div>
+
+<div class="bk"
+style="width:80px;height:80px;top:20%;right:10px;--d:11s;--tx:-20px;--ty:30px;">
+</div>
+
+<div class="bk"
+style="width:150px;height:150px;top:40%;left:20%;--d:13s;--tx:25px;--ty:-35px;">
+</div>
+
+<div class="bk"
+style="width:100px;height:100px;bottom:10%;right:5%;--d:10s;--tx:-25px;--ty:20px;">
+</div>
+
+</div>
+
+<p class="cd-label-top">FALTA :</p>
+
+<p class="cd-title">
+7 de Noviembre · 2026 · 20:30 hs
+</p>
+
+<div class="cd-grid" id="cd-grid">
+
+<div class="cd-item">
+<div class="cd-num-wrap">
+<span class="cd-num" id="cd-d">--</span>
+</div>
+<span class="cd-lbl">Días</span>
+</div>
+
+<div class="cd-item">
+<div class="cd-num-wrap">
+<span class="cd-num" id="cd-h">--</span>
+</div>
+<span class="cd-lbl">Hs</span>
+</div>
+
+<div class="cd-item">
+<div class="cd-num-wrap">
+<span class="cd-num" id="cd-m">--</span>
+</div>
+<span class="cd-lbl">Min</span>
+</div>
+
+<div class="cd-item">
+<div class="cd-num-wrap">
+<span class="cd-num" id="cd-s">--</span>
+</div>
+<span class="cd-lbl">Seg</span>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- ═════════════════════════════
+GALERÍA
+═════════════════════════════ -->
+
+<section class="section">
+
+<div class="reveal">
+
+<p class="s-eyebrow">✦ galería</p>
+
+<h2 class="s-title">
+Momentos de Morena
+</h2>
+
+</div>
+
+<div class="s-div reveal" style="transition-delay:.1s">
+
+<div class="s-line"></div>
+<span class="s-star">✦</span>
+<div class="s-line r"></div>
+
+</div>
+
+<div class="gal-wrap reveal" style="transition-delay:.15s">
+
+<div class="gal-hero"
+onclick="openLB('https://i.ibb.co/Pv8HTMfX/Gal1.jpg','Morena · I')">
+
+<img
+src="https://i.ibb.co/Pv8HTMfX/Gal1.jpg"
+alt="Morena I"
+loading="eager">
+
+<div class="gal-shimmer"></div>
+
+<span class="gal-lbl">I</span>
+
+</div>
+
+<div class="gal-pair">
+
+<div class="gal-pair-item"
+onclick="openLB('https://i.ibb.co/0yBLspfJ/Gal2.jpg','Morena · II')">
+
+<img
+src="https://i.ibb.co/0yBLspfJ/Gal2.jpg"
+alt="Morena II"
+loading="lazy">
+
+<div class="gal-shimmer"></div>
+
+<span class="gal-lbl">II</span>
+
+</div>
+
+<div class="gal-pair-item"
+onclick="openLB('https://i.ibb.co/5W8XShc1/Gal3.jpg','Morena · III')">
+
+<img
+src="https://i.ibb.co/5W8XShc1/Gal3.jpg"
+alt="Morena III"
+loading="lazy">
+
+<div class="gal-shimmer"></div>
+
+<span class="gal-lbl">III</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ═════════════════════════════
+LIGHTBOX
+═════════════════════════════ -->
+
+<div id="lightbox"
+role="dialog"
+aria-modal="true"
+onclick="closeLB()">
+
+<button id="lb-close"
+aria-label="Cerrar">
+✕
+</button>
+
+<img id="lb-img" src="" alt="">
+
+<span id="lb-cap"></span>
+
+</div>
+
+<!-- ═════════════════════════════
+DRESS CODE
+═════════════════════════════ -->
+
+<section class="section" style="padding-top:0">
+
+<div class="reveal">
+
+<p class="s-eyebrow">
+✦ indumentaria
+</p>
+
+</div>
+
+<div class="dc-card reveal" style="transition-delay:.1s">
+
+<div class="dc-icon-wrap">
+👗
+</div>
+
+<div class="dc-title">
+Dress Code
+</div>
+
+<div class="dc-subtitle">
+Elegante · Formal
+</div>
+
+<p class="dc-desc">
+Para acompañar a Morena en una noche tan especial,
+te invitamos a vestir de manera elegante y formal.
+<br><br>
+Queremos compartir una noche llena de luz,
+elegancia y momentos inolvidables.
+</p>
+
+<div class="dc-tags">
+
+<span class="dc-tag">Elegante</span>
+<span class="dc-tag">Formal</span>
+<span class="dc-tag">Gala</span>
+<span class="dc-tag">Noche</span>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ═════════════════════════════
+REGALO / TRANSFERENCIA
+═════════════════════════════ -->
+
+<section class="section" style="padding-top:0">
+
+<div class="reveal">
+
+<p class="s-eyebrow">
+✦ sugerencia de regalo
+</p>
+
+<h2 class="s-title">
+¿No sabés qué regalar?
+</h2>
+
+</div>
+
+<div class="s-div reveal" style="transition-delay:.1s">
+
+<div class="s-line"></div>
+<span class="s-star">✦</span>
+<div class="s-line r"></div>
+
+</div>
+
+<div class="regalo-card reveal" style="transition-delay:.15s">
+
+<span class="cofre-icon">
+🎁
+</span>
+
+<div class="regalo-title">
+Un detalle para Morena
+</div>
+
+<div class="regalo-subtitle">
+· Con cariño ·
+</div>
+
+<p class="regalo-desc">
+
+Lo más importante para Morena es poder compartir
+esta noche tan especial junto a las personas que quiere.
+
+<br><br>
+
+Si además de tu presencia querés hacerle un regalo,
+podés hacerlo de una manera simple y especial
+a través de una transferencia.
+
+</p>
+
+<div class="transfer-box">
+
+<span class="transfer-label">
+Datos para transferencia
+</span>
+
+<div class="transfer-alias">
+morena.tour.2011
+</div>
+
+<div class="transfer-name">
+A nombre de<br>
+<strong>Morena Gisele Juarez Bogado</strong>
+</div>
+
+<div class="transfer-copy">
+✦ Alias bancario · Regalo para Morena
+</div>
+
+</div>
+
+<div class="regalo-highlight">
+
+Tu presencia en esta noche tan importante
+es, sin dudas, el regalo más especial.
+<br><br>
+Y si querés acompañarla también con un detalle,
+esta es una forma sencilla de hacerlo. 🤍
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ═════════════════════════════
+DETALLES
+═════════════════════════════ -->
+
+<section class="section">
+
+<div class="reveal">
+
+<p class="s-eyebrow">
+✦ detalles
+</p>
+
+<h2 class="s-title">
+La velada
+</h2>
+
+</div>
+
+<div class="s-div reveal" style="transition-delay:.1s">
+
+<div class="s-line"></div>
+<span class="s-star">✦</span>
+<div class="s-line r"></div>
+
+</div>
+
+<div class="reveal" style="transition-delay:.15s">
+
+<div class="det-card">
+
+<div class="det-num">01</div>
+
+<div class="det-info">
+
+<div class="det-lbl">
+Fecha
+</div>
+
+<div class="det-val">
+Sábado 7 de Noviembre, 2026
+</div>
+
+</div>
+</div>
+
+<div class="det-card">
+
+<div class="det-num">02</div>
+
+<div class="det-info">
+
+<div class="det-lbl">
+Horario
+</div>
+
+<div class="det-val">
+20:30 hs
+</div>
+
+<div class="det-sub">
+Hasta las 05:00 hs · ¡Que comience la celebración! ✨
+</div>
+
+</div>
+</div>
+
+<div class="det-card">
+
+<div class="det-num">03</div>
+
+<div class="det-info">
+
+<div class="det-lbl">
+Lugar
+</div>
+
+<div class="det-val">
+Sindicato SOIP
+</div>
+
+<div class="det-sub">
+12 de Octubre 4445 · Mar del Plata, Argentina
+</div>
+
+</div>
+</div>
+
+<div class="det-card">
+
+<div class="det-num">04</div>
+
+<div class="det-info">
+
+<div class="det-lbl">
+Dress Code
+</div>
+
+<div class="det-val">
+Elegante / Formal
+</div>
+
+<div class="det-sub">
+Una noche para vestir tus mejores galas
+</div>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- ═════════════════════════════
+MAPA
+═════════════════════════════ -->
+
+<section class="section" style="padding-top:0">
+
+<div class="reveal">
+
+<p class="s-eyebrow">
+✦ ubicación
+</p>
+
+<h2 class="s-title">
+Cómo llegar
+</h2>
+
+</div>
+
+<div class="s-div reveal" style="transition-delay:.1s">
+
+<div class="s-line"></div>
+<span class="s-star">✦</span>
+<div class="s-line r"></div>
+
+</div>
+
+<div class="map-wrap reveal" style="transition-delay:.15s">
+
+<div id="map"></div>
+
+<div class="map-body">
+
+<div class="map-name">
+Sindicato SOIP
+</div>
+
+<div class="map-addr">
+12 de Octubre 4445<br>
+Mar del Plata, Buenos Aires, Argentina
+</div>
+
+<button class="btn-gps" onclick="openGPS()">
+
+<span>📍</span>
+
+¿Cómo llegar?
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ═════════════════════════════
+RSVP
+═════════════════════════════ -->
+
+<div class="rsvp-header reveal">
+
+<span class="rsvp-label">
+✦ R · S · V · P
+</span>
+
+<h2 class="rsvp-title">
+Confirmación
+</h2>
+
+<p class="rsvp-sub">
+Morena espera recibirte en su gran noche.
+<br>
+Por favor confirmá tu asistencia.
+</p>
+
+<div class="rsvp-deadline">
+⏳ Fecha límite: <strong>1 de Noviembre, 2026</strong>
+</div>
+
+</div>
+
+<div class="cf-wrap reveal">
+
+<div id="cf-form">
+
+<div class="f-group">
+
+<label class="f-label" for="f-name">
+Tu nombre completo
+</label>
+
+<input
+class="f-input"
+id="f-name"
+type="text"
+placeholder="¿Cómo te llamás?"
+autocomplete="name">
+
+</div>
+
+<div class="f-group">
+
+<div class="f-label" style="margin-bottom:10px;">
+¿Asistís?
+</div>
+
+<div class="f-radio-group">
+
+<div
+class="f-radio-opt selected"
+id="opt-si"
+onclick="selectOpt('si')">
+
+✦ Sí, voy
+
+</div>
+
+<div
+class="f-radio-opt"
+id="opt-no"
+onclick="selectOpt('no')">
+
+✕ No puedo
+
+</div>
+
+</div>
+
+</div>
+
+<div id="asiste-fields"></div>
+
+<div class="f-group">
+
+<label class="f-label" for="f-msg">
+Un mensaje para Morena (opcional)
+</label>
+
+<textarea
+class="f-input"
+id="f-msg"
+rows="3"
+placeholder="Un deseo, un abrazo... ✨"
+style="resize:none;"></textarea>
+
+</div>
+
+<button class="btn-confirm" onclick="sendWA()">
+
+<span>✦</span>
+
+Confirmar asistencia
+
+<span>✦</span>
+
+</button>
+
+</div>
+
+<div class="cf-ok" id="cf-ok">
+
+<span class="cf-ok-icon">
+✨
+</span>
+
+<div class="cf-ok-msg">
+¡Morena te espera con los brazos abiertos!
+</div>
+
+<div class="cf-ok-sub">
+Tu confirmación fue enviada por WhatsApp.
+<br>
+¡Nos vemos en la gran noche! ✦
+</div>
+
+</div>
+
+</div>
+
+<!-- ═════════════════════════════
+FOOTER
+═════════════════════════════ -->
+
+<footer class="footer">
+
+<span class="ft-ornament">
+✦ ✦ ✦
+</span>
+
+<p class="ft-quote">
+
+Quince años son el comienzo
+de una nueva etapa,
+de sueños por cumplir,
+de historias por escribir
+y momentos que quedarán
+para siempre en el corazón.
+
+<br><br>
+
+Morena, que esta noche
+sea tan especial como vos.
+
+</p>
+
+<div class="ft-name">
+Morena
+</div>
+
+<div class="ft-div"></div>
+
+<p class="ft-brand">
+XV Años · 7 de Noviembre · 2026
+</p>
+
+<span class="ft-stars">
+✦ ✦ ✦
+</span>
+
+</footer>
+
+<!-- ═════════════════════════════
+BRANDING
+═════════════════════════════ -->
+
+<div class="branding-strip">
+
+<span class="branding-label">
+Invitación digital diseñada por
+</span>
+
+<a
+class="branding-logo-wrap"
+href="https://instagram.com/NovaInvite.co"
+target="_blank"
+rel="noopener"
+aria-label="Instagram @NovaInvite.co">
+
+<div class="branding-ig-icon">
+📷
+</div>
+
+<span class="branding-handle">
+@NovaInvite.co
+</span>
+
+</a>
+
+<span class="branding-sub">
+Invitaciones digitales premium · Instagram
+</span>
+
+</div>
+
+<!-- ═════════════════════════════
+AUDIO
+═════════════════════════════ -->
+
+<audio id="bg-music" loop preload="auto">
+
+<source
+src="https://raw.githubusercontent.com/Estudiofotoinfantil/ModeloInvitacionXV/main/Ed%20Sheeran%20-%20Photograph%20(Official%20Music%20Video)%20-%20(64%20Kbps).mp3"
+type="audio/mpeg">
+
+</audio>
+
+<button id="mute-btn"
+onclick="toggleMute()"
+aria-label="Mutear música">
+
+🔊
+
+</button>
+
+</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+/* ═════════════════════════════
+VARIABLES
+═════════════════════════════ */
+
+var asiste='si';
+
+
+/* ═════════════════════════════
+OPEN INVITATION
+═════════════════════════════ */
+
+function openInvitation(){
+
+var intro=document.getElementById('intro');
+
+intro.style.opacity='0';
+
+var music=document.getElementById('bg-music');
+
+music.volume=.5;
+
+music.play().catch(function(){});
+
+document.getElementById('mute-btn').style.display='flex';
+
+setTimeout(function(){
+
+intro.style.display='none';
+
+document.getElementById('main').classList.add('visible');
+
+initGlitter('glitter-bg',180,22,1.2);
+
+initReveal();
+
+initCountdown();
+
+initMap();
+
+},1200);
+
+}
+
+
+/* ═════════════════════════════
+MUTE
+═════════════════════════════ */
+
+function toggleMute(){
+
+var music=document.getElementById('bg-music');
+
+var btn=document.getElementById('mute-btn');
+
+music.muted=!music.muted;
+
+btn.textContent=music.muted?'🔇':'🔊';
+
+}
+
+
+/* ═════════════════════════════
+GLITTER
+═════════════════════════════ */
+
+function initGlitter(canvasId,density,bokehCount,sz){
+
+var cv=document.getElementById(canvasId);
+
+if(!cv)return;
+
+var ctx=cv.getContext('2d');
+
+function resize(){
+
+cv.width=Math.min(window.innerWidth,430);
+
+cv.height=window.innerHeight;
+
+}
+
+resize();
+
+window.addEventListener('resize',resize);
+
+var dust=[];
+
+for(var i=0;i<density;i++){
+
+dust.push({
+
+x:Math.random()*cv.width,
+
+y:Math.random()*cv.height,
+
+r:.3+Math.random()*sz,
+
+a:.08+Math.random()*.45,
+
+vx:(Math.random()-.5)*.12,
+
+vy:(Math.random()-.5)*.08,
+
+phase:Math.random()*Math.PI*2,
+
+ts:.02+Math.random()*.04
+
+});
+
+}
+
+var bokeh=[];
+
+for(var j=0;j<bokehCount;j++){
+
+var bs=6+Math.random()*28;
+
+bokeh.push({
+
+x:Math.random()*cv.width,
+
+y:Math.random()*cv.height,
+
+r:bs,
+
+a:.03+Math.random()*.10,
+
+vx:(Math.random()-.5)*.06,
+
+vy:(Math.random()-.5)*.04,
+
+phase:Math.random()*Math.PI*2,
+
+sp:.008+Math.random()*.012
+
+});
+
+}
+
+var sparks=[];
+
+function spawnSpark(){
+
+sparks.push({
+
+x:Math.random()*cv.width,
+
+y:Math.random()*cv.height,
+
+size:2+Math.random()*4,
+
+a:1,
+
+da:.02+Math.random()*.03,
+
+rot:Math.random()*Math.PI*2,
+
+drot:(Math.random()-.5)*.08
+
+});
+
+}
+
+setInterval(function(){
+
+if(sparks.length<15)spawnSpark();
+
+},300);
+
+var frame=0;
+
+function draw(){
+
+ctx.clearRect(0,0,cv.width,cv.height);
+
+frame++;
+
+dust.forEach(function(p){
+
+p.x+=p.vx;
+
+p.y+=p.vy;
+
+if(p.x<0)p.x=cv.width;
+
+if(p.x>cv.width)p.x=0;
+
+if(p.y<0)p.y=cv.height;
+
+if(p.y>cv.height)p.y=0;
+
+var a=p.a*(.4+.6*Math.sin(frame*p.ts+p.phase));
+
+ctx.save();
+
+ctx.globalAlpha=a;
+
+ctx.fillStyle='#B89455';
+
+ctx.beginPath();
+
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+
+ctx.fill();
+
+ctx.restore();
+
+});
+
+bokeh.forEach(function(b){
+
+b.x+=b.vx;
+
+b.y+=b.vy;
+
+if(b.x<-50)b.x=cv.width+50;
+
+if(b.x>cv.width+50)b.x=-50;
+
+if(b.y<-50)b.y=cv.height+50;
+
+if(b.y>cv.height+50)b.y=-50;
+
+var a=b.a*(.5+.5*Math.sin(frame*b.sp+b.phase));
+
+ctx.save();
+
+ctx.globalAlpha=a;
+
+var gr=ctx.createRadialGradient(
+b.x,b.y,0,
+b.x,b.y,b.r
+);
+
+gr.addColorStop(0,'rgba(216,188,130,1)');
+
+gr.addColorStop(.4,'rgba(184,148,85,.5)');
+
+gr.addColorStop(1,'rgba(184,148,85,0)');
+
+ctx.fillStyle=gr;
+
+ctx.beginPath();
+
+ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+
+ctx.fill();
+
+ctx.restore();
+
+});
+
+sparks=sparks.filter(function(s){
+
+s.a-=s.da;
+
+s.rot+=s.drot;
+
+if(s.a<=0)return false;
+
+ctx.save();
+
+ctx.globalAlpha=s.a*.6;
+
+ctx.fillStyle='#B89455';
+
+ctx.translate(s.x,s.y);
+
+ctx.rotate(s.rot);
+
+var sp=s.size;
+
+ctx.beginPath();
+
+ctx.moveTo(0,-sp*2);
+
+ctx.lineTo(sp*.4,-sp*.4);
+
+ctx.lineTo(sp*2,0);
+
+ctx.lineTo(sp*.4,sp*.4);
+
+ctx.lineTo(0,sp*2);
+
+ctx.lineTo(-sp*.4,sp*.4);
+
+ctx.lineTo(-sp*2,0);
+
+ctx.lineTo(-sp*.4,-sp*.4);
+
+ctx.closePath();
+
+ctx.fill();
+
+ctx.restore();
+
+return true;
+
+});
+
+requestAnimationFrame(draw);
+
+}
+
+draw();
+
+}
+
+
+/* ═════════════════════════════
+REVEAL
+═════════════════════════════ */
+
+function initReveal(){
+
+var obs=new IntersectionObserver(function(en){
+
+en.forEach(function(e){
+
+if(e.isIntersecting){
+
+e.target.classList.add('visible');
+
+obs.unobserve(e.target);
+
+}
+
+});
+
+},{threshold:.08});
+
+document.querySelectorAll('.reveal').forEach(function(el){
+
+obs.observe(el);
+
+});
+
+}
+
+
+/* ═════════════════════════════
+COUNTDOWN
+═════════════════════════════ */
+
+function initCountdown(){
+
+/*
+Argentina:
+7 de noviembre de 2026
+20:30 hs
+*/
+
+var target=new Date('2026-11-07T20:30:00-03:00');
+
+function upd(){
+
+var diff=target-new Date();
+
+if(diff<=0){
+
+document.getElementById('cd-grid').innerHTML=
+
+'<p style="font-family:Cormorant Garamond,serif;font-size:20px;font-style:italic;color:#B89455;padding:1rem;grid-column:1/-1;text-align:center;">✦ ¡Esta noche es LA noche de Morena! ✦</p>';
+
+return;
+
+}
+
+var d=Math.floor(diff/86400000);
+
+var h=Math.floor(
+(diff%86400000)/3600000
+);
+
+var m=Math.floor(
+(diff%3600000)/60000
+);
+
+var s=Math.floor(
+(diff%60000)/1000
+);
+
+document.getElementById('cd-d').textContent=
+String(d).padStart(2,'0');
+
+document.getElementById('cd-h').textContent=
+String(h).padStart(2,'0');
+
+document.getElementById('cd-m').textContent=
+String(m).padStart(2,'0');
+
+document.getElementById('cd-s').textContent=
+String(s).padStart(2,'0');
+
+}
+
+upd();
+
+setInterval(upd,1000);
+
+}
+
+
+/* ═════════════════════════════
+MAP
+═════════════════════════════ */
+
+function initMap(){
+
+/*
+Coordenadas aproximadas de
+12 de Octubre 4445,
+Mar del Plata.
+
+Se puede reemplazar por las
+coordenadas exactas del salón.
+*/
+
+var lat=-38.0055;
+
+var lng=-57.5535;
+
+var map=L.map('map',{
+zoomControl:true,
+dragging:true,
+scrollWheelZoom:false
+}).setView([lat,lng],15);
+
+L.tileLayer(
+'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+attribution:'© OpenStreetMap'
+}
+).addTo(map);
+
+var icon=L.divIcon({
+
+html:
+'<div style="font-size:25px;color:#B89455;filter:drop-shadow(0 0 8px rgba(184,148,85,.5))">✦</div>',
+
+iconSize:[30,30],
+
+iconAnchor:[15,30],
+
+className:''
+
+});
+
+L.marker([lat,lng],{
+icon:icon
+})
+.addTo(map)
+.bindPopup(
+'<b>Sindicato SOIP</b><br>XV Años · Morena'
+)
+.openPopup();
+
+}
+
+
+/* ═════════════════════════════
+GPS
+═════════════════════════════ */
+
+function openGPS(){
+
+var lat=-38.0055;
+
+var lng=-57.5535;
+
+window.open(
+
+'https://www.google.com/maps/dir/?api=1&destination='
++lat+','+lng,
+
+'_blank'
+
+);
+
+}
+
+
+/* ═════════════════════════════
+LIGHTBOX
+═════════════════════════════ */
+
+function openLB(src,cap){
+
+document.getElementById('lb-img').src=src;
+
+document.getElementById('lb-cap').textContent=cap;
+
+document.getElementById('lightbox').classList.add('open');
+
+document.body.style.overflow='hidden';
+
+}
+
+function closeLB(){
+
+document.getElementById('lightbox').classList.remove('open');
+
+document.body.style.overflow='';
+
+}
+
+
+/* ═════════════════════════════
+RSVP
+═════════════════════════════ */
+
+function selectOpt(v){
+
+asiste=v;
+
+document
+.getElementById('opt-si')
+.classList
+.toggle('selected',v==='si');
+
+document
+.getElementById('opt-no')
+.classList
+.toggle('selected',v==='no');
+
+}
+
+
+/* ═════════════════════════════
+WHATSAPP
+═════════════════════════════ */
+
+function sendWA(){
+
+var name=
+document
+.getElementById('f-name')
+.value
+.trim();
+
+if(!name){
+
+document.getElementById('f-name').focus();
+
+return;
+
+}
+
+var msg=
+document
+.getElementById('f-msg')
+.value
+.trim();
+
+var text;
+
+if(asiste==='si'){
+
+text=
+'Hola! Soy '
++name+
+' y quería confirmar que voy a estar en los XV de Morena. 🤍\n\n'
++
+'Nos vemos el 7 de noviembre. ¡Qué lindo compartir esta noche con ustedes! ✨';
+
+}else{
+
+text=
+'Hola! Soy '
++name+
+'. Lamentablemente no voy a poder asistir a los XV de Morena. '
++
+'Les deseo una noche hermosa e inolvidable. ✨';
+
+}
+
+if(msg){
+
+text+='\n\n'+msg;
+
+}
+
+/*
+WhatsApp actualizado:
++54 9 2235 05-0426
+*/
+
+var phone='5492235050426';
+
+window.open(
+'https://api.whatsapp.com/send?phone='
++phone+
+'&text='
++encodeURIComponent(text),
+'_blank'
+);
+
+document.getElementById('cf-form').style.display='none';
+
+document.getElementById('cf-ok').classList.add('show');
+
+}
+
+
+/* ═════════════════════════════
+START INTRO GLITTER
+═════════════════════════════ */
+
+initGlitter('intro-canvas',220,30,1.4);
+
+</script>
+
+</body>
+</html>
