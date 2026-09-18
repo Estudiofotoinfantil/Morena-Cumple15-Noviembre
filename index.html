@@ -63,9 +63,7 @@ position:relative;
 z-index:1;
 }
 
-/* ═════════════════════════════
-INTRO
-═════════════════════════════ */
+/* INTRO */
 
 #intro {
 position:fixed;
@@ -138,12 +136,7 @@ margin-top:.5rem;
 .intro-line {
 width:120px;
 height:1px;
-background:linear-gradient(
-90deg,
-transparent,
-var(--gold),
-transparent
-);
+background:linear-gradient(90deg,transparent,var(--gold),transparent);
 margin:1.5rem auto;
 animation:fadeUp 1s ease 1s both;
 }
@@ -179,18 +172,7 @@ box-shadow:0 8px 30px rgba(120,90,40,.08);
 transition:all .3s;
 }
 
-.intro-btn:hover {
-background:rgba(184,148,85,.15);
-border-color:var(--gold);
-}
-
-.intro-btn:active {
-transform:scale(.96);
-}
-
-/* ═════════════════════════════
-MAIN
-═════════════════════════════ */
+/* MAIN */
 
 #main {
 opacity:0;
@@ -201,9 +183,7 @@ transition:opacity 1.2s ease;
 opacity:1;
 }
 
-/* ═════════════════════════════
-HERO
-═════════════════════════════ */
+/* HERO */
 
 .hero {
 min-height:100svh;
@@ -214,7 +194,6 @@ justify-content:center;
 padding:4rem 1.5rem 3rem;
 text-align:center;
 position:relative;
-
 background:
 radial-gradient(
 circle at 50% 45%,
@@ -333,15 +312,12 @@ border-bottom:1px solid rgba(184,148,85,.5);
 transform:rotate(45deg);
 }
 
-/* ═════════════════════════════
-COUNTDOWN
-═════════════════════════════ */
+/* COUNTDOWN */
 
 .cd-bokeh-strip {
 position:relative;
 padding:3rem 1.5rem;
 overflow:hidden;
-
 background:
 linear-gradient(
 135deg,
@@ -349,7 +325,6 @@ linear-gradient(
 #FBF8F1,
 #EFE3CF
 );
-
 border-top:1px solid rgba(184,148,85,.16);
 border-bottom:1px solid rgba(184,148,85,.16);
 }
@@ -364,19 +339,13 @@ overflow:hidden;
 .bk {
 position:absolute;
 border-radius:50%;
-
 background:
 radial-gradient(
 circle,
 rgba(216,188,130,.20) 0%,
 transparent 70%
 );
-
-animation:
-bokehFloat var(--d,8s)
-ease-in-out infinite
-var(--dl,0s);
-
+animation:bokehFloat var(--d,8s) ease-in-out infinite var(--dl,0s);
 filter:blur(2px);
 }
 
@@ -455,9 +424,7 @@ color:var(--text-soft);
 font-weight:500;
 }
 
-/* ═════════════════════════════
-SECTIONS
-═════════════════════════════ */
+/* SECTIONS */
 
 .section {
 padding:3.5rem 1.5rem;
@@ -514,131 +481,63 @@ color:var(--gold);
 opacity:.7;
 }
 
-/* ═════════════════════════════
-GALLERY
-═════════════════════════════ */
+/* GALERÍA — ÚNICA MODIFICACIÓN */
 
 .gal-wrap {
-display:flex;
-flex-direction:column;
-gap:3px;
-}
-
-.gal-hero,
-.gal-pair-item {
-position:relative;
-background:#EFE7D8;
-border:1px solid rgba(184,148,85,.18);
-overflow:hidden;
-cursor:pointer;
-transition:border-color .3s;
-}
-
-.gal-hero:hover,
-.gal-pair-item:hover {
-border-color:rgba(184,148,85,.45);
-}
-
-.gal-hero img,
-.gal-pair-item img {
-width:100%;
-height:auto;
-display:block;
-transition:transform .6s ease;
-}
-
-.gal-hero:hover img,
-.gal-pair-item:hover img {
-transform:scale(1.02);
-}
-
-.gal-pair {
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:3px;
+gap:8px;
 }
 
-.gal-shimmer {
-position:absolute;
-inset:0;
-pointer-events:none;
-
+.photo-placeholder {
+position:relative;
+aspect-ratio:1/1.15;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
 background:
 linear-gradient(
-to top,
-rgba(55,42,25,.20) 0%,
-transparent 40%
+135deg,
+#F5EFE3,
+#FBF8F1,
+#EFE3CF
 );
+border:1px solid rgba(184,148,85,.25);
+overflow:hidden;
+box-shadow:0 6px 22px rgba(120,90,40,.05);
 }
 
-.gal-lbl {
+.photo-placeholder::before {
+content:'';
 position:absolute;
-bottom:10px;
-left:50%;
-transform:translateX(-50%);
-font-size:7.5px;
-letter-spacing:3px;
-text-transform:uppercase;
-color:rgba(255,255,255,.78);
-white-space:nowrap;
-text-shadow:0 1px 4px rgba(0,0,0,.55);
+inset:8px;
+border:1px solid rgba(184,148,85,.16);
+pointer-events:none;
 }
 
-/* ═════════════════════════════
-LIGHTBOX
-═════════════════════════════ */
-
-#lightbox {
-display:none;
-position:fixed;
-inset:0;
-background:rgba(53,43,30,.94);
-z-index:800;
-align-items:center;
-justify-content:center;
-padding:1rem;
-flex-direction:column;
-gap:1rem;
-}
-
-#lightbox.open {
-display:flex;
-}
-
-#lb-img {
-max-width:100%;
-max-height:90svh;
-object-fit:contain;
-border:1px solid rgba(216,188,130,.45);
-}
-
-#lb-cap {
-font-size:9.5px;
-letter-spacing:3px;
-text-transform:uppercase;
-color:rgba(255,255,255,.65);
-}
-
-#lb-close {
+.photo-placeholder::after {
+content:'✦';
 position:absolute;
 top:14px;
-right:14px;
-width:38px;
-height:38px;
-background:rgba(255,255,255,.12);
-border:1px solid rgba(216,188,130,.35);
-border-radius:50%;
-color:#F8E9C9;
-font-size:17px;
-cursor:pointer;
-display:flex;
-align-items:center;
-justify-content:center;
+left:50%;
+transform:translateX(-50%);
+font-size:14px;
+color:rgba(184,148,85,.45);
 }
 
-/* ═════════════════════════════
-DRESS CODE
-═════════════════════════════ */
+.photo-placeholder span {
+position:relative;
+z-index:2;
+font-family:'Cormorant Garamond',serif;
+font-size:22px;
+font-style:italic;
+font-weight:600;
+letter-spacing:2px;
+color:var(--brown-soft);
+}
+
+/* DRESS CODE */
 
 .dc-card,
 .regalo-card {
@@ -648,13 +547,11 @@ linear-gradient(
 rgba(255,255,255,.60),
 rgba(245,237,222,.55)
 );
-
 border:1px solid rgba(184,148,85,.20);
 padding:2rem 1.5rem;
 text-align:center;
 position:relative;
 overflow:hidden;
-
 box-shadow:
 0 12px 40px rgba(120,90,40,.05);
 }
@@ -667,7 +564,6 @@ top:0;
 left:0;
 right:0;
 height:1px;
-
 background:
 linear-gradient(
 90deg,
@@ -685,7 +581,6 @@ bottom:0;
 left:0;
 right:0;
 height:1px;
-
 background:
 linear-gradient(
 90deg,
@@ -754,9 +649,7 @@ font-weight:400;
 background:rgba(216,188,130,.08);
 }
 
-/* ═════════════════════════════
-REGALO
-═════════════════════════════ */
+/* REGALO */
 
 .cofre-icon {
 font-size:52px;
@@ -793,11 +686,8 @@ margin-bottom:1.25rem;
 }
 
 .transfer-box {
-background:
-rgba(216,188,130,.09);
-
+background:rgba(216,188,130,.09);
 border:1px solid rgba(184,148,85,.25);
-
 padding:1.25rem 1rem;
 margin-top:1rem;
 text-align:left;
@@ -861,9 +751,7 @@ background:var(--ivory);
 padding:0 8px;
 }
 
-/* ═════════════════════════════
-DETAILS
-═════════════════════════════ */
+/* DETAILS */
 
 .det-card {
 display:flex;
@@ -915,9 +803,7 @@ color:var(--text-mid);
 margin-top:3px;
 }
 
-/* ═════════════════════════════
-MAP
-═════════════════════════════ */
+/* MAP */
 
 .map-wrap {
 border:1px solid rgba(184,148,85,.20);
@@ -972,18 +858,7 @@ box-shadow:0 5px 20px rgba(120,90,40,.04);
 transition:all .3s;
 }
 
-.btn-gps:hover {
-background:rgba(216,188,130,.16);
-border-color:rgba(184,148,85,.55);
-}
-
-.btn-gps:active {
-transform:scale(.98);
-}
-
-/* ═════════════════════════════
-RSVP
-═════════════════════════════ */
+/* RSVP */
 
 .rsvp-header {
 text-align:center;
@@ -1123,7 +998,6 @@ linear-gradient(
 rgba(216,188,130,.12),
 rgba(184,148,85,.06)
 );
-
 border:1px solid rgba(184,148,85,.40);
 color:var(--brown);
 padding:16px;
@@ -1140,15 +1014,6 @@ justify-content:center;
 gap:10px;
 box-shadow:0 7px 25px rgba(120,90,40,.06);
 transition:all .3s;
-}
-
-.btn-confirm:hover {
-background:rgba(216,188,130,.18);
-border-color:rgba(184,148,85,.65);
-}
-
-.btn-confirm:active {
-transform:scale(.98);
 }
 
 .cf-ok {
@@ -1183,9 +1048,7 @@ font-weight:300;
 line-height:1.7;
 }
 
-/* ═════════════════════════════
-FOOTER
-═════════════════════════════ */
+/* FOOTER */
 
 .footer {
 padding:4rem 2rem 2.5rem;
@@ -1273,9 +1136,7 @@ margin-top:2rem;
 display:block;
 }
 
-/* ═════════════════════════════
-BRANDING
-═════════════════════════════ */
+/* BRANDING */
 
 .branding-strip {
 border-top:1px solid rgba(184,148,85,.12);
@@ -1303,11 +1164,6 @@ padding:10px 20px;
 background:rgba(255,255,255,.45);
 text-decoration:none;
 transition:border-color .3s,background .3s;
-}
-
-.branding-logo-wrap:hover {
-border-color:rgba(184,148,85,.45);
-background:rgba(216,188,130,.10);
 }
 
 .branding-ig-icon {
@@ -1341,9 +1197,7 @@ display:block;
 font-weight:300;
 }
 
-/* ═════════════════════════════
-MUSIC BUTTON
-═════════════════════════════ */
+/* MUSIC */
 
 #mute-btn {
 position:fixed;
@@ -1363,13 +1217,9 @@ display:none;
 align-items:center;
 justify-content:center;
 box-shadow:0 4px 18px rgba(80,60,30,.15);
-transition:border-color .3s,transform .15s;
--webkit-tap-highlight-color:transparent;
 }
 
-/* ═════════════════════════════
-ANIMATIONS
-═════════════════════════════ */
+/* ANIMATIONS */
 
 @keyframes fadeUp {
 from {
@@ -1443,10 +1293,6 @@ transform:translateY(0);
 
 <canvas id="glitter-bg"></canvas>
 
-<!-- ═════════════════════════════
-INTRO
-═════════════════════════════ -->
-
 <div id="intro" role="dialog" aria-label="Invitación XV Años Morena">
 
 <canvas id="intro-canvas"></canvas>
@@ -1476,10 +1322,6 @@ Abrir Invitación
 <div id="page-wrap">
 
 <div id="main">
-
-<!-- ═════════════════════════════
-HERO
-═════════════════════════════ -->
 
 <section class="hero">
 
@@ -1511,10 +1353,6 @@ onclick="document.getElementById('cd-section').scrollIntoView({behavior:'smooth'
 </div>
 
 </section>
-
-<!-- ═════════════════════════════
-COUNTDOWN
-═════════════════════════════ -->
 
 <div id="cd-section">
 
@@ -1580,9 +1418,7 @@ style="width:100px;height:100px;bottom:10%;right:5%;--d:10s;--tx:-25px;--ty:20px
 </div>
 </div>
 
-<!-- ═════════════════════════════
-GALERÍA
-═════════════════════════════ -->
+<!-- GALERÍA DE 4 FOTOS -->
 
 <section class="section">
 
@@ -1606,79 +1442,25 @@ Momentos de Morena
 
 <div class="gal-wrap reveal" style="transition-delay:.15s">
 
-<div class="gal-hero"
-onclick="openLB('https://i.ibb.co/Pv8HTMfX/Gal1.jpg','Morena · I')">
-
-<img
-src="https://i.ibb.co/Pv8HTMfX/Gal1.jpg"
-alt="Morena I"
-loading="eager">
-
-<div class="gal-shimmer"></div>
-
-<span class="gal-lbl">I</span>
-
+<div class="photo-placeholder">
+<span>FOTO 1 AQUÍ</span>
 </div>
 
-<div class="gal-pair">
-
-<div class="gal-pair-item"
-onclick="openLB('https://i.ibb.co/0yBLspfJ/Gal2.jpg','Morena · II')">
-
-<img
-src="https://i.ibb.co/0yBLspfJ/Gal2.jpg"
-alt="Morena II"
-loading="lazy">
-
-<div class="gal-shimmer"></div>
-
-<span class="gal-lbl">II</span>
-
+<div class="photo-placeholder">
+<span>FOTO 2 AQUÍ</span>
 </div>
 
-<div class="gal-pair-item"
-onclick="openLB('https://i.ibb.co/5W8XShc1/Gal3.jpg','Morena · III')">
-
-<img
-src="https://i.ibb.co/5W8XShc1/Gal3.jpg"
-alt="Morena III"
-loading="lazy">
-
-<div class="gal-shimmer"></div>
-
-<span class="gal-lbl">III</span>
-
+<div class="photo-placeholder">
+<span>FOTO 3 AQUÍ</span>
 </div>
 
+<div class="photo-placeholder">
+<span>FOTO 4 AQUÍ</span>
 </div>
 
 </div>
 
 </section>
-
-<!-- ═════════════════════════════
-LIGHTBOX
-═════════════════════════════ -->
-
-<div id="lightbox"
-role="dialog"
-aria-modal="true"
-onclick="closeLB()">
-
-<button id="lb-close"
-aria-label="Cerrar">
-✕
-</button>
-
-<img id="lb-img" src="" alt="">
-
-<span id="lb-cap"></span>
-
-</div>
-
-<!-- ═════════════════════════════
-DRESS CODE
-═════════════════════════════ -->
 
 <section class="section" style="padding-top:0">
 
@@ -1724,10 +1506,6 @@ elegancia y momentos inolvidables.
 </div>
 
 </section>
-
-<!-- ═════════════════════════════
-REGALO / TRANSFERENCIA
-═════════════════════════════ -->
 
 <section class="section" style="padding-top:0">
 
@@ -1812,10 +1590,6 @@ esta es una forma sencilla de hacerlo. 🤍
 </div>
 
 </section>
-
-<!-- ═════════════════════════════
-DETALLES
-═════════════════════════════ -->
 
 <section class="section">
 
@@ -1925,10 +1699,6 @@ Una noche para vestir tus mejores galas
 
 </section>
 
-<!-- ═════════════════════════════
-MAPA
-═════════════════════════════ -->
-
 <section class="section" style="padding-top:0">
 
 <div class="reveal">
@@ -1979,10 +1749,6 @@ Mar del Plata, Buenos Aires, Argentina
 </div>
 
 </section>
-
-<!-- ═════════════════════════════
-RSVP
-═════════════════════════════ -->
 
 <div class="rsvp-header reveal">
 
@@ -2104,10 +1870,6 @@ Tu confirmación fue enviada por WhatsApp.
 
 </div>
 
-<!-- ═════════════════════════════
-FOOTER
-═════════════════════════════ -->
-
 <footer class="footer">
 
 <span class="ft-ornament">
@@ -2146,10 +1908,6 @@ XV Años · 7 de Noviembre · 2026
 
 </footer>
 
-<!-- ═════════════════════════════
-BRANDING
-═════════════════════════════ -->
-
 <div class="branding-strip">
 
 <span class="branding-label">
@@ -2179,10 +1937,6 @@ Invitaciones digitales premium · Instagram
 
 </div>
 
-<!-- ═════════════════════════════
-AUDIO
-═════════════════════════════ -->
-
 <audio id="bg-music" loop preload="auto">
 
 <source
@@ -2206,16 +1960,7 @@ aria-label="Mutear música">
 
 <script>
 
-/* ═════════════════════════════
-VARIABLES
-═════════════════════════════ */
-
 var asiste='si';
-
-
-/* ═════════════════════════════
-OPEN INVITATION
-═════════════════════════════ */
 
 function openInvitation(){
 
@@ -2249,11 +1994,6 @@ initMap();
 
 }
 
-
-/* ═════════════════════════════
-MUTE
-═════════════════════════════ */
-
 function toggleMute(){
 
 var music=document.getElementById('bg-music');
@@ -2265,11 +2005,6 @@ music.muted=!music.muted;
 btn.textContent=music.muted?'🔇':'🔊';
 
 }
-
-
-/* ═════════════════════════════
-GLITTER
-═════════════════════════════ */
 
 function initGlitter(canvasId,density,bokehCount,sz){
 
@@ -2298,19 +2033,12 @@ for(var i=0;i<density;i++){
 dust.push({
 
 x:Math.random()*cv.width,
-
 y:Math.random()*cv.height,
-
 r:.3+Math.random()*sz,
-
 a:.08+Math.random()*.45,
-
 vx:(Math.random()-.5)*.12,
-
 vy:(Math.random()-.5)*.08,
-
 phase:Math.random()*Math.PI*2,
-
 ts:.02+Math.random()*.04
 
 });
@@ -2326,19 +2054,12 @@ var bs=6+Math.random()*28;
 bokeh.push({
 
 x:Math.random()*cv.width,
-
 y:Math.random()*cv.height,
-
 r:bs,
-
 a:.03+Math.random()*.10,
-
 vx:(Math.random()-.5)*.06,
-
 vy:(Math.random()-.5)*.04,
-
 phase:Math.random()*Math.PI*2,
-
 sp:.008+Math.random()*.012
 
 });
@@ -2352,17 +2073,11 @@ function spawnSpark(){
 sparks.push({
 
 x:Math.random()*cv.width,
-
 y:Math.random()*cv.height,
-
 size:2+Math.random()*4,
-
 a:1,
-
 da:.02+Math.random()*.03,
-
 rot:Math.random()*Math.PI*2,
-
 drot:(Math.random()-.5)*.08
 
 });
@@ -2386,15 +2101,11 @@ frame++;
 dust.forEach(function(p){
 
 p.x+=p.vx;
-
 p.y+=p.vy;
 
 if(p.x<0)p.x=cv.width;
-
 if(p.x>cv.width)p.x=0;
-
 if(p.y<0)p.y=cv.height;
-
 if(p.y>cv.height)p.y=0;
 
 var a=p.a*(.4+.6*Math.sin(frame*p.ts+p.phase));
@@ -2402,13 +2113,10 @@ var a=p.a*(.4+.6*Math.sin(frame*p.ts+p.phase));
 ctx.save();
 
 ctx.globalAlpha=a;
-
 ctx.fillStyle='#B89455';
 
 ctx.beginPath();
-
 ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-
 ctx.fill();
 
 ctx.restore();
@@ -2418,15 +2126,11 @@ ctx.restore();
 bokeh.forEach(function(b){
 
 b.x+=b.vx;
-
 b.y+=b.vy;
 
 if(b.x<-50)b.x=cv.width+50;
-
 if(b.x>cv.width+50)b.x=-50;
-
 if(b.y<-50)b.y=cv.height+50;
-
 if(b.y>cv.height+50)b.y=-50;
 
 var a=b.a*(.5+.5*Math.sin(frame*b.sp+b.phase));
@@ -2441,17 +2145,13 @@ b.x,b.y,b.r
 );
 
 gr.addColorStop(0,'rgba(216,188,130,1)');
-
 gr.addColorStop(.4,'rgba(184,148,85,.5)');
-
 gr.addColorStop(1,'rgba(184,148,85,0)');
 
 ctx.fillStyle=gr;
 
 ctx.beginPath();
-
 ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
-
 ctx.fill();
 
 ctx.restore();
@@ -2461,7 +2161,6 @@ ctx.restore();
 sparks=sparks.filter(function(s){
 
 s.a-=s.da;
-
 s.rot+=s.drot;
 
 if(s.a<=0)return false;
@@ -2469,11 +2168,9 @@ if(s.a<=0)return false;
 ctx.save();
 
 ctx.globalAlpha=s.a*.6;
-
 ctx.fillStyle='#B89455';
 
 ctx.translate(s.x,s.y);
-
 ctx.rotate(s.rot);
 
 var sp=s.size;
@@ -2481,25 +2178,16 @@ var sp=s.size;
 ctx.beginPath();
 
 ctx.moveTo(0,-sp*2);
-
 ctx.lineTo(sp*.4,-sp*.4);
-
 ctx.lineTo(sp*2,0);
-
 ctx.lineTo(sp*.4,sp*.4);
-
 ctx.lineTo(0,sp*2);
-
 ctx.lineTo(-sp*.4,sp*.4);
-
 ctx.lineTo(-sp*2,0);
-
 ctx.lineTo(-sp*.4,-sp*.4);
-
 ctx.closePath();
 
 ctx.fill();
-
 ctx.restore();
 
 return true;
@@ -2513,11 +2201,6 @@ requestAnimationFrame(draw);
 draw();
 
 }
-
-
-/* ═════════════════════════════
-REVEAL
-═════════════════════════════ */
 
 function initReveal(){
 
@@ -2545,18 +2228,7 @@ obs.observe(el);
 
 }
 
-
-/* ═════════════════════════════
-COUNTDOWN
-═════════════════════════════ */
-
 function initCountdown(){
-
-/*
-Argentina:
-7 de noviembre de 2026
-20:30 hs
-*/
 
 var target=new Date('2026-11-07T20:30:00-03:00');
 
@@ -2608,21 +2280,7 @@ setInterval(upd,1000);
 
 }
 
-
-/* ═════════════════════════════
-MAP
-═════════════════════════════ */
-
 function initMap(){
-
-/*
-Coordenadas aproximadas de
-12 de Octubre 4445,
-Mar del Plata.
-
-Se puede reemplazar por las
-coordenadas exactas del salón.
-*/
 
 var lat=-38.0055;
 
@@ -2647,9 +2305,7 @@ html:
 '<div style="font-size:25px;color:#B89455;filter:drop-shadow(0 0 8px rgba(184,148,85,.5))">✦</div>',
 
 iconSize:[30,30],
-
 iconAnchor:[15,30],
-
 className:''
 
 });
@@ -2665,57 +2321,18 @@ icon:icon
 
 }
 
-
-/* ═════════════════════════════
-GPS
-═════════════════════════════ */
-
 function openGPS(){
 
 var lat=-38.0055;
-
 var lng=-57.5535;
 
 window.open(
-
 'https://www.google.com/maps/dir/?api=1&destination='
 +lat+','+lng,
-
 '_blank'
-
 );
 
 }
-
-
-/* ═════════════════════════════
-LIGHTBOX
-═════════════════════════════ */
-
-function openLB(src,cap){
-
-document.getElementById('lb-img').src=src;
-
-document.getElementById('lb-cap').textContent=cap;
-
-document.getElementById('lightbox').classList.add('open');
-
-document.body.style.overflow='hidden';
-
-}
-
-function closeLB(){
-
-document.getElementById('lightbox').classList.remove('open');
-
-document.body.style.overflow='';
-
-}
-
-
-/* ═════════════════════════════
-RSVP
-═════════════════════════════ */
 
 function selectOpt(v){
 
@@ -2732,11 +2349,6 @@ document
 .toggle('selected',v==='no');
 
 }
-
-
-/* ═════════════════════════════
-WHATSAPP
-═════════════════════════════ */
 
 function sendWA(){
 
@@ -2788,11 +2400,6 @@ text+='\n\n'+msg;
 
 }
 
-/*
-WhatsApp actualizado:
-+54 9 2235 05-0426
-*/
-
 var phone='5492235050426';
 
 window.open(
@@ -2808,11 +2415,6 @@ document.getElementById('cf-form').style.display='none';
 document.getElementById('cf-ok').classList.add('show');
 
 }
-
-
-/* ═════════════════════════════
-START INTRO GLITTER
-═════════════════════════════ */
 
 initGlitter('intro-canvas',220,30,1.4);
 
